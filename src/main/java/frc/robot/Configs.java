@@ -7,7 +7,7 @@ package frc.robot;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import frc.robot.Constants.DriveConstants;
-import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
+import com.revrobotics.spark.FeedbackSensor;
 
 public final class Configs {
     //All motors contained within the the DriveSystem.
