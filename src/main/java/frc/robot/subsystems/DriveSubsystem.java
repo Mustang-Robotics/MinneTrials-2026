@@ -7,10 +7,10 @@ package frc.robot.subsystems;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.controllers.PPLTVController;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.ResetMode;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkMax;
-import com.revrobotics.spark.SparkBase.PersistMode;
-import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.PersistMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkBase.ControlType;
 
@@ -122,8 +122,8 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void setVelocity(double leftRadPerSec, double rightRadPerSec) {
-    leftController.setReference(leftRadPerSec, ControlType.kVelocity);
-    rightController.setReference(rightRadPerSec, ControlType.kVelocity);
+    leftController.setSetpoint(leftRadPerSec, ControlType.kVelocity);
+    rightController.setSetpoint(rightRadPerSec, ControlType.kVelocity);
   }
 
   public void runClosedLoop(ChassisSpeeds speeds) {

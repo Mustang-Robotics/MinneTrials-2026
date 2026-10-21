@@ -38,15 +38,16 @@ public final class Configs {
                 .closedLoop //closedLoop feedback relates to changing the values of the motors based on sensor values. If the motor is not turning the correct amount it will adjust based on these valuse.
                 .feedbackSensor(FeedbackSensor.kPrimaryEncoder) //declares which sensor is being used to controll the feedback loop
                 .pid(DriveConstants.kP, DriveConstants.kI, DriveConstants.kD) //go to this website for more info https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/introduction-to-pid.html
-                .velocityFF(1/DriveConstants.kDriveWheelFreeSpeed) //go to this website for more info https://docs.wpilib.org/en/stable/docs/software/advanced-controls/controllers/feedforward.html#feedforward-control-in-wpilib
-                .outputRange(-1, 1); //minimum and maximum speeds of the motor. 1 corresponds to full speed.
+                //.velocityFF(1/DriveConstants.kDriveWheelFreeSpeed) //go to this website for more info https://docs.wpilib.org/en/stable/docs/software/advanced-controls/controllers/feedforward.html#feedforward-control-in-wpilib
+                .outputRange(-1, 1) //minimum and maximum speeds of the motor. 1 corresponds to full speed.
+                .feedForward.kV(1/DriveConstants.kDriveWheelFreeSpeed); //go to this website for more info https://docs.wpilib.org/en/stable/docs/software/advanced-controls/controllers/feedforward.html#feedforward-control-in-wpilib
 
-            leftFollowConfig
+            /*leftFollowConfig
                 .idleMode(IdleMode.kBrake) //likely not needed because it is following the Lead
                 .smartCurrentLimit(DriveConstants.kStallCurrent) //likely not needed because it is following the Lead
                 .voltageCompensation(12) //likely not needed because it is following the Lead
                 .follow(DriveConstants.kLeftLeader); //tells which motor to follow. This means it will have all of the same behaviors as the motor it is following
-
+            */
             rightLeadConfig
                 .idleMode(IdleMode.kBrake)
                 .smartCurrentLimit(DriveConstants.kStallCurrent)
@@ -64,20 +65,21 @@ public final class Configs {
                 .closedLoop
                 .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
                 .pid(DriveConstants.kP, DriveConstants.kI, DriveConstants.kD)
-                .velocityFF(1/DriveConstants.kDriveWheelFreeSpeed)
-                .outputRange(-1, 1);
+                //.velocityFF(1/DriveConstants.kDriveWheelFreeSpeed)
+                .outputRange(-1, 1)
+                .feedForward.kV(1/DriveConstants.kDriveWheelFreeSpeed);
 
-            rightFollowConfig
+            /*rightFollowConfig
                 .idleMode(IdleMode.kBrake)
                 .smartCurrentLimit(DriveConstants.kStallCurrent)
                 .voltageCompensation(12)
                 .follow(DriveConstants.kRightLeader);
-            
+            */
         }
 
     }
 
-    public static final class Shooter {
+    /*public static final class Shooter {
         public static final SparkMaxConfig ShooterConfig = new SparkMaxConfig();
         public static final SparkMaxConfig IndexerConfig = new SparkMaxConfig();
 
@@ -108,7 +110,7 @@ public final class Configs {
                 .inverted(true);
         }
 
-    }
+    }*/
 
     //Add new subsystems here. Use formatting style from above
 }
