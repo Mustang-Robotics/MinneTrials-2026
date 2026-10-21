@@ -33,9 +33,9 @@ import frc.robot.Constants.DriveConstants;
 public class DriveSubsystem extends SubsystemBase {
   
   private final SparkMax m_leftLeader =  new SparkMax(DriveConstants.kLeftLeader, MotorType.kBrushless);
-  private final SparkMax m_leftFollower =  new SparkMax(DriveConstants.kLeftFollower, MotorType.kBrushless);
+  //private final SparkMax m_leftFollower =  new SparkMax(DriveConstants.kLeftFollower, MotorType.kBrushless);
   private final SparkMax m_rightLeader =  new SparkMax(DriveConstants.kRightLeader, MotorType.kBrushless);
-  private final SparkMax m_rightFollower =  new SparkMax(DriveConstants.kRightFollower, MotorType.kBrushless);
+  //private final SparkMax m_rightFollower =  new SparkMax(DriveConstants.kRightFollower, MotorType.kBrushless);
   private final RelativeEncoder leftEncoder = m_leftLeader.getEncoder();
   private final RelativeEncoder rightEncoder = m_rightLeader.getEncoder();
   private final SparkClosedLoopController leftController = m_leftLeader.getClosedLoopController();
@@ -58,20 +58,21 @@ public class DriveSubsystem extends SubsystemBase {
       ResetMode.kResetSafeParameters,
       PersistMode.kPersistParameters);
       
-    m_leftFollower.configure(
+    /*m_leftFollower.configure(
       Configs.DriveSystem.leftFollowConfig,
       ResetMode.kResetSafeParameters,
       PersistMode.kPersistParameters);
-      
+    */  
     m_rightLeader.configure(
       Configs.DriveSystem.rightLeadConfig,
       ResetMode.kResetSafeParameters,
       PersistMode.kPersistParameters);
       
-    m_rightFollower.configure(
+    /*m_rightFollower.configure(
       Configs.DriveSystem.rightFollowConfig,
       ResetMode.kResetSafeParameters,
       PersistMode.kPersistParameters);
+    */
 
     leftEncoder.setPosition(0);
     rightEncoder.setPosition(0);

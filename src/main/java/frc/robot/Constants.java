@@ -39,15 +39,15 @@ public final class Constants {
   public static final class DriveConstants {
 
     public static final int kLeftLeader = 33; //CAN ID of LeftLeader Motor. Used in DriveSubsystem
-    public static final int kLeftFollower = 34; //CAN ID of LeftFollower Motor. Used in DriveSubsystem
+    //public static final int kLeftFollower = 34; //CAN ID of LeftFollower Motor. Used in DriveSubsystem
     public static final int kRightLeader = 31; //CAN ID of RightLeader Motor. Used in DriveSubsystem
-    public static final int kRightFollower = 32; //CAN ID of RightFollower Motor. Used in DriveSubsystem
+    //public static final int kRightFollower = 32; //CAN ID of RightFollower Motor. Used in DriveSubsystem
     public static final int kStallCurrent = 30; //Maximum amount of current that will get sent to a motor. Used in Configs
     //The following numbers get used in calculations to help tune the speed of the drivetrain
     public static final double kP = 0.0465; //Proportional Gain See Constants for explanation
     public static final double kI = 0; //Integral Gain See Constants for explanation
     public static final double kD = 0; //Derivative Gain See Constants for explanation
-    public static final double kTrackwidth = 0.557; //width from center to center of wheels measured in meters.
+    public static final double kTrackwidth = 0.403; //width from center to center of wheels measured in meters.
     public static final double kWheelRadiusMeters = Units.inchesToMeters(3); //other way to use meters but not have to convert from inches
     public static final double kWheelCircumferenceMeters = kWheelRadiusMeters * 2 * Math.PI;
     public static final double kNeoFreeSpeed = 5676; //RPMS of NEO motor. Can be looked up on REVRobotics
