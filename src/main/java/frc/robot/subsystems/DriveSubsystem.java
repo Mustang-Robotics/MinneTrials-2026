@@ -82,7 +82,7 @@ public class DriveSubsystem extends SubsystemBase {
     this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
     this::getRobotRelaviteSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
     (ChassisSpeeds speeds) -> runClosedLoop(speeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
-    new PPLTVController(AutoConfig.qelems, AutoConfig.relems, 0.2, 3.2),
+    new PPLTVController(AutoConfig.qelems, AutoConfig.relems, 0.2, 3.2), // 3.2 m/s = 10.5 ft/s
     AutoConfig.config,
     () -> {
       var alliance = DriverStation.getAlliance();
