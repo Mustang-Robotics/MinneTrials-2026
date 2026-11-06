@@ -79,6 +79,34 @@ public final class Configs {
 
     }
 
+    public static final class Elevator {
+        public static final SparkMaxConfig elevatorConfig = new SparkMaxConfig();
+
+        static {
+                elevatorConfig
+                .idleMode(IdleMode.kCoast)
+                .smartCurrentLimit(50)
+                .inverted(true)
+                .voltageCompensation(12);
+
+                /*elevatorConfig
+                .encoder
+                .positionConversionFactor(100)
+                .velocityConversionFactor(100);
+
+                elevatorConfig
+                .closedLoop
+                .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
+                .p(.0035)
+                .outputRange(-1, 1)
+                .maxMotion
+                .maxVelocity(500000)
+                .maxAcceleration(500000)
+                .allowedClosedLoopError(10);
+                */
+        }
+    }
+
     /*public static final class Shooter {
         public static final SparkMaxConfig ShooterConfig = new SparkMaxConfig();
         public static final SparkMaxConfig IndexerConfig = new SparkMaxConfig();

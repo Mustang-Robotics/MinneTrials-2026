@@ -38,7 +38,7 @@ public final class Constants {
   //constants related to the drivesystem
   public static final class DriveConstants {
 
-    public static final int kLeftLeader = 31; //CAN ID of LeftLeader Motor. Used in DriveSubsystem
+    public static final int kLeftLeader = 9; //CAN ID of LeftLeader Motor. Used in DriveSubsystem
     //public static final int kLeftFollower = 34; //CAN ID of LeftFollower Motor. Used in DriveSubsystem
     public static final int kRightLeader = 6; //CAN ID of RightLeader Motor. Used in DriveSubsystem
     //public static final int kRightFollower = 32; //CAN ID of RightFollower Motor. Used in DriveSubsystem
