@@ -13,7 +13,7 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.ArcadeDrive;
-
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.Elevator;
 
@@ -32,6 +32,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveSubsystem m_drive = new DriveSubsystem();
   private final Elevator m_elevator = new Elevator();
+  private final Arm m_arm = new Arm();
   //private final ShooterSubsystem m_shooter = new ShooterSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -57,8 +58,12 @@ public class RobotContainer {
     
     //m_driverController.rightTrigger().onTrue(new SequentialCommandGroup(new SetShooterSpeed(m_shooter, 5250), new IndexOn(m_shooter))); 
     //m_driverController.rightTrigger().onFalse(new SequentialCommandGroup(new SetShooterSpeed(m_shooter, 0), new IndexOff(m_shooter)));
-    m_driverController.a().whileTrue(new InstantCommand(() -> m_elevator.SetSpeed(-.05)));
-    m_driverController.y().whileTrue(new InstantCommand(() -> m_elevator.SetSpeed(.05)));
+    m_driverController.a().onTrue(new InstantCommand(() -> m_elevator.changeSetpoint(1)));
+    m_driverController.y().onTrue(new InstantCommand(() -> m_elevator.changeSetpoint(20)));
+    //m_driverController.a().onFalse(new InstantCommand(() -> m_elevator.SetSpeed(0)));
+    //m_driverController.y().onFalse(new InstantCommand(() -> m_elevator.SetSpeed(0)));
+    m_driverController.b().onTrue(new InstantCommand(() -> m_arm.changeSetpoint(0)));
+    m_driverController.x().onTrue(new InstantCommand(() -> m_arm.changeSetpoint(.11)));
     m_drive.setDefaultCommand(
         new ArcadeDrive(m_drive,() -> -m_driverController.getLeftY(),() -> -m_driverController.getRightX())); //using arcade drive command. telling which controller buttons are inputs
       }

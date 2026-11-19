@@ -42,7 +42,7 @@ public final class Constants {
     //public static final int kLeftFollower = 34; //CAN ID of LeftFollower Motor. Used in DriveSubsystem
     public static final int kRightLeader = 6; //CAN ID of RightLeader Motor. Used in DriveSubsystem
     //public static final int kRightFollower = 32; //CAN ID of RightFollower Motor. Used in DriveSubsystem
-    public static final int kStallCurrent = 30; //Maximum amount of current that will get sent to a motor. Used in Configs
+    public static final int kStallCurrent = 60; //Maximum amount of current that will get sent to a motor. Used in Configs
     //The following numbers get used in calculations to help tune the speed of the drivetrain
     public static final double kP = 0.0465; //Proportional Gain See Constants for explanation
     public static final double kI = 0; //Integral Gain See Constants for explanation

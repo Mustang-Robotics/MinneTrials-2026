@@ -89,21 +89,46 @@ public final class Configs {
                 .inverted(true)
                 .voltageCompensation(12);
 
-                /*elevatorConfig
-                .encoder
-                .positionConversionFactor(100)
-                .velocityConversionFactor(100);
-
                 elevatorConfig
                 .closedLoop
                 .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
-                .p(.0035)
+                .p(.02)
+                .outputRange(-.3, .3)
+                .feedForward
+                .kV(.002)
+                .kS(.1835)
+                .kG(.4245);
+                
+        }
+    }
+
+    public static final class Arm {
+        public static final SparkMaxConfig armConfig = new SparkMaxConfig();
+
+        static {
+                armConfig
+                .idleMode(IdleMode.kCoast)
+                .smartCurrentLimit(10)
+                .inverted(true)
+                .voltageCompensation(12);
+
+                armConfig
+                .absoluteEncoder
+                .positionConversionFactor(1)
+                .velocityConversionFactor(1)
+                .inverted(true);
+
+                armConfig
+                .closedLoop
+                .feedbackSensor(FeedbackSensor.kAbsoluteEncoder)
+                .p(3.5)
                 .outputRange(-1, 1)
-                .maxMotion
-                .maxVelocity(500000)
-                .maxAcceleration(500000)
-                .allowedClosedLoopError(10);
-                */
+                .positionWrappingEnabled(true)
+                .feedForward
+                .kV(1.2661)
+                .kS(.0685)
+                .kA(.002517);;
+
         }
     }
 

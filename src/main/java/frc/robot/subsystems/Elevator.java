@@ -6,8 +6,8 @@ import com.revrobotics.spark.ClosedLoopSlot;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkBase.ControlType;
-import com.revrobotics.spark.SparkBase.PersistMode;
-import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.PersistMode;
+import com.revrobotics.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -20,7 +20,7 @@ public class Elevator extends SubsystemBase {
 private final SparkMax m_elevator = new SparkMax(8, MotorType.kBrushless);
 private SparkClosedLoopController elevatorClosedLoopController = m_elevator.getClosedLoopController();
 public RelativeEncoder elevatorEncoder = m_elevator.getEncoder();
-private double elevatorTarget = 0;
+private double elevatorTarget = 1;
 public double SpeedAdjustment = 1;
 
 
@@ -45,8 +45,8 @@ public double SpeedAdjustment = 1;
 
   private void moveToSetpoint() {
     
-    elevatorClosedLoopController.setReference(
-        elevatorTarget, ControlType.kMAXMotionPositionControl, ClosedLoopSlot.kSlot0, 0.35);
+    elevatorClosedLoopController.setSetpoint(
+        elevatorTarget, ControlType.kPosition, ClosedLoopSlot.kSlot0);
   }
 
 
@@ -60,7 +60,7 @@ public double SpeedAdjustment = 1;
 
   @Override
   public void periodic() {
-    //moveToSetpoint();
-    //ElevatorSpeedAdjustment();
+    moveToSetpoint();
+    ElevatorSpeedAdjustment();
   }
 }
