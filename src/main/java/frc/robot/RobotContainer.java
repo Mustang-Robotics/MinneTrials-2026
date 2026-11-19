@@ -56,8 +56,6 @@ public class RobotContainer {
   //method to configure trigger bindings any thing we want the robot to do based on some state (button press, or sensor value) should go in here
   private void configureBindings() {
     
-    //m_driverController.rightTrigger().onTrue(new SequentialCommandGroup(new SetShooterSpeed(m_shooter, 5250), new IndexOn(m_shooter))); 
-    //m_driverController.rightTrigger().onFalse(new SequentialCommandGroup(new SetShooterSpeed(m_shooter, 0), new IndexOff(m_shooter)));
     m_driverController.a().onTrue(new InstantCommand(() -> m_elevator.changeSetpoint(1)));
     m_driverController.y().onTrue(new InstantCommand(() -> m_elevator.changeSetpoint(20)));
     //m_driverController.a().onFalse(new InstantCommand(() -> m_elevator.SetSpeed(0)));
