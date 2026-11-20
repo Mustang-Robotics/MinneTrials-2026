@@ -62,7 +62,7 @@ public class RobotContainer {
     m_driverController.y().onTrue(new InstantCommand(() -> m_elevator.changeSetpoint(20)));
     //m_driverController.a().onFalse(new InstantCommand(() -> m_elevator.SetSpeed(0)));
     //m_driverController.y().onFalse(new InstantCommand(() -> m_elevator.SetSpeed(0)));
-    m_driverController.b().onTrue(new InstantCommand(() -> m_arm.changeSetpoint(0)));
+    m_driverController.b().onTrue(new InstantCommand(() -> m_arm.changeSetpoint(0.01)));
     m_driverController.x().onTrue(new InstantCommand(() -> m_arm.changeSetpoint(.11)));
     m_drive.setDefaultCommand(
         new ArcadeDrive(m_drive,() -> -m_driverController.getLeftY(),() -> -m_driverController.getRightX())); //using arcade drive command. telling which controller buttons are inputs
