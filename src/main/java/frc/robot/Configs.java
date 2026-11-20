@@ -98,6 +98,13 @@ public final class Configs {
                 .kV(.002)
                 .kS(.1835)
                 .kG(.4245);
+
+                elevatorConfig
+                .closedLoop
+                .maxMotion
+                .allowedProfileError(1)
+                .cruiseVelocity(5600)
+                .maxAcceleration(5000);
                 
         }
     }
@@ -127,7 +134,8 @@ public final class Configs {
                 .feedForward
                 .kV(1.2661)
                 .kS(.0685)
-                .kA(.002517);;
+                .kA(.002517);
+                
 
         }
     }

@@ -57,7 +57,7 @@ public class RobotContainer {
   private void configureBindings() {
     
     m_driverController.a().onTrue(new InstantCommand(() -> m_elevator.changeSetpoint(1)));
-    m_driverController.y().onTrue(new InstantCommand(() -> m_elevator.changeSetpoint(20)));
+    m_driverController.y().onTrue(new InstantCommand(() -> m_elevator.changeSetpoint(21.9)));
     //m_driverController.a().onFalse(new InstantCommand(() -> m_elevator.SetSpeed(0)));
     //m_driverController.y().onFalse(new InstantCommand(() -> m_elevator.SetSpeed(0)));
     m_driverController.b().onTrue(new InstantCommand(() -> m_arm.changeSetpoint(0.01)));
