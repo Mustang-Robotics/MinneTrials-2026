@@ -16,6 +16,7 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Elevator extends SubsystemBase {
@@ -125,5 +126,8 @@ public class Elevator extends SubsystemBase {
           moveToSetpoint();
         }
         ElevatorSpeedAdjustment();
-    }
+        SmartDashboard.putBoolean("Low", elevatorTarget == Setpoints.kElevatorLow);
+        SmartDashboard.putBoolean("High", elevatorTarget == Setpoints.kElevatorHigh);
+        SmartDashboard.putBoolean("Mid", elevatorTarget == Setpoints.kElevatorMid);
+      }
 }

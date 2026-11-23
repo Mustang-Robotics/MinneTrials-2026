@@ -80,7 +80,7 @@ public class RobotContainer {
     ));
 
     m_drive.setDefaultCommand(
-        new ArcadeDrive(m_drive,() -> -m_driverController.getLeftY(),() -> -m_driverController.getRightX())); //using arcade drive command. telling which controller buttons are inputs
+        new ArcadeDrive(m_drive,() -> -m_driverController.getLeftY(),() -> -m_driverController.getRightX(),() -> m_driverController.leftBumper().getAsBoolean())); //using arcade drive command. telling which controller buttons are inputs
   }
   
 

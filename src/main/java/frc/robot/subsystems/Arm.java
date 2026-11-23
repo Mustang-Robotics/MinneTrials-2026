@@ -9,6 +9,7 @@ import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.PersistMode;
 import com.revrobotics.ResetMode;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Configs;
 import frc.robot.Constants.Setpoints;
@@ -46,5 +47,7 @@ public class Arm extends SubsystemBase {
   @Override
   public void periodic() {
     moveToSetpoint();
+    SmartDashboard.putBoolean("Arm Low", armTarget == Setpoints.kArmLow);
+    SmartDashboard.putBoolean("Arm High", armTarget == Setpoints.kArmHigh);
   }
 }
