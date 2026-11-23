@@ -2,6 +2,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.Configs;
+import frc.robot.Constants.Setpoints;
 
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.ClosedLoopSlot;
@@ -25,7 +26,7 @@ public class Elevator extends SubsystemBase {
         m_elevator.getClosedLoopController();
 
     public RelativeEncoder elevatorEncoder = m_elevator.getEncoder();
-    private double elevatorTarget = 1;
+    private double elevatorTarget = Setpoints.kElevatorLow;
     public double SpeedAdjustment = 1;
 
     // Tracks the previous robot state
@@ -73,13 +74,13 @@ public class Elevator extends SubsystemBase {
 
     public void ResetElevatorZero() {
         elevatorEncoder.setPosition(0);
-        elevatorTarget = 0;
     }
 
     public void StopElevator() {
         SetSpeed(0);
         SetCurrentLimit(50);
         manualControl = false;
+        elevatorTarget = Setpoints.kElevatorLow;
     }
 
     private void SetCurrentLimit(int limit) {

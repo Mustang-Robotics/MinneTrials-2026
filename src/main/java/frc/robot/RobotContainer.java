@@ -75,7 +75,8 @@ public class RobotContainer {
     m_driverController.start().whileTrue(new RunCommand(() -> m_elevator.ManualDown(), m_elevator));
     m_driverController.start().onFalse(new SequentialCommandGroup(
       new InstantCommand(() -> m_elevator.ResetElevatorZero(), m_elevator), 
-      new InstantCommand(() -> m_elevator.StopElevator(), m_elevator)
+      new InstantCommand(() -> m_elevator.StopElevator(), m_elevator),
+      new InstantCommand(() -> m_arm.changeSetpoint(Setpoints.kArmHigh), m_arm)
     ));
 
     m_drive.setDefaultCommand(

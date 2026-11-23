@@ -35,7 +35,7 @@ public final class Constants {
     //Changable values for tuning the robot. These are the only values that should be changed in the Setpoints class.
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     public static final double kElevatorLow = 1.0; //low setpoint for elevator
-    public static final double kElevatorMid = 14.0; //mid setpoint for elevator
+    public static final double kElevatorMid = 12.0; //mid setpoint for elevator
     public static final double kElevatorHigh = 21.9; //high setpoint for elevator
     public static final double kArmLow = 0.01; //low setpoint for arm
     public static final double kArmHigh = 0.115; //high setpoint for arm

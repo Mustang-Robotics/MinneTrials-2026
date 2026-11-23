@@ -11,13 +11,14 @@ import com.revrobotics.ResetMode;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Configs;
+import frc.robot.Constants.Setpoints;
 
 public class Arm extends SubsystemBase {
   //Creates a SparkMax motor controller for the arm & an encoder for the arm
   private final SparkMax m_arm = new SparkMax(16, MotorType.kBrushless);
   private SparkClosedLoopController armClosedLoopController = m_arm.getClosedLoopController();
   public final AbsoluteEncoder armEncoder = m_arm.getAbsoluteEncoder();
-  public double armTarget = .11;
+  public double armTarget = Setpoints.kArmHigh;
 
   //Creates a feedforward controller for the arm & a PID controller for the arm
   //private ArmFeedforward armFeedforward = new ArmFeedforward(0, 0, 0, 0);
