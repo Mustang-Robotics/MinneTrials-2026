@@ -64,7 +64,10 @@ public class Elevator extends SubsystemBase {
     }
 
     public void ManualDown() {
-        manualControl = true;
+        if (!manualControl) {
+            SetCurrentLimit(10);
+            manualControl = true;
+        }
         SetSpeed(-0.15);
     }
 
@@ -75,8 +78,20 @@ public class Elevator extends SubsystemBase {
 
     public void StopElevator() {
         SetSpeed(0);
+        SetCurrentLimit(50);
         manualControl = false;
     }
+
+    private void SetCurrentLimit(int limit) {
+    SparkMaxConfig config = new SparkMaxConfig();
+    config.smartCurrentLimit(limit);
+
+    m_elevator.configure(
+        config,
+        ResetMode.kNoResetSafeParameters,
+        PersistMode.kNoPersistParameters
+    );
+}
 
     // Changes idle mode when the robot changes between enabled and disabled
     private void updateIdleMode() {
