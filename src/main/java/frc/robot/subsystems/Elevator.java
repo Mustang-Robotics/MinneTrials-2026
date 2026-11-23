@@ -30,6 +30,7 @@ public class Elevator extends SubsystemBase {
 
     // Tracks the previous robot state
     private boolean wasDisabled = true;
+    private boolean manualControl = false;
 
     public Elevator() {
 
@@ -58,8 +59,23 @@ public class Elevator extends SubsystemBase {
         SpeedAdjustment = 1 - (elevatorEncoder.getPosition() / 5000);
     }
 
-    public void SetSpeed(double speed) {
+    private void SetSpeed(double speed) {
         m_elevator.set(speed);
+    }
+
+    public void ManualDown() {
+        manualControl = true;
+        SetSpeed(-0.15);
+    }
+
+    public void ResetElevatorZero() {
+        elevatorEncoder.setPosition(0);
+        elevatorTarget = 0;
+    }
+
+    public void StopElevator() {
+        SetSpeed(0);
+        manualControl = false;
     }
 
     // Changes idle mode when the robot changes between enabled and disabled
@@ -70,9 +86,11 @@ public class Elevator extends SubsystemBase {
 
             SparkMaxConfig config = new SparkMaxConfig();
 
-            config.idleMode(
-                isDisabled ? IdleMode.kBrake : IdleMode.kCoast
-            );
+            if(isDisabled) {
+                config.idleMode(IdleMode.kBrake);
+            } else {
+                config.idleMode(IdleMode.kCoast);
+            }
 
             m_elevator.configure(
                 config,
@@ -87,7 +105,9 @@ public class Elevator extends SubsystemBase {
     @Override
     public void periodic() {
         updateIdleMode();
-        moveToSetpoint();
+        if(!manualControl){
+          moveToSetpoint();
+        }
         ElevatorSpeedAdjustment();
     }
 }

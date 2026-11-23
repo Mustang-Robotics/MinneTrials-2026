@@ -26,6 +26,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 
@@ -46,8 +48,11 @@ public class RobotContainer {
   public RobotContainer() {
     //Pathplanner auto commands are registered here, this is where we can create our own commands to be used in pathplanner if we want to
     NamedCommands.registerCommand("ElevatorUp", new InstantCommand(() -> m_elevator.changeSetpoint(Setpoints.kElevatorHigh), m_elevator));
-
-//Need to add more NamedCommands 1 for Arm Down, and 1 for reeseting the elevator and arm to their intake positions.
+    NamedCommands.registerCommand("ArmDown", new InstantCommand(() -> m_arm.changeSetpoint(Setpoints.kArmLow), m_arm));
+    NamedCommands.registerCommand("Reset", new ParallelCommandGroup(
+      new InstantCommand(() -> m_elevator.changeSetpoint(Setpoints.kElevatorLow), m_elevator),
+      new InstantCommand(() -> m_arm.changeSetpoint(Setpoints.kArmHigh), m_arm)
+    ));
 
     // Configure the trigger bindings
     configureBindings(); //this is a method created below, we are running it here to define the triggers for commands
@@ -61,20 +66,21 @@ public class RobotContainer {
     //m_driverController.a().onTrue(new InstantCommand(() -> m_elevator.changeSetpoint(1)));
     m_driverController.rightTrigger().onTrue(new InstantCommand(() -> m_elevator.changeSetpoint(Setpoints.kElevatorHigh), m_elevator));
     m_driverController.rightTrigger().onFalse(new InstantCommand(() -> m_arm.changeSetpoint(Setpoints.kArmLow), m_arm));
+    m_driverController.leftTrigger().onTrue(new InstantCommand(() -> m_elevator.changeSetpoint(Setpoints.kElevatorMid), m_elevator));
+    m_driverController.leftTrigger().onFalse(new InstantCommand(() -> m_arm.changeSetpoint(Setpoints.kArmLow), m_arm));
     m_driverController.rightBumper().onTrue(new ParallelCommandGroup(
       new InstantCommand(() -> m_elevator.changeSetpoint(Setpoints.kElevatorLow), m_elevator), 
-      new InstantCommand(() -> m_arm.changeSetpoint(Setpoints.kArmHigh), m_arm)));
+      new InstantCommand(() -> m_arm.changeSetpoint(Setpoints.kArmHigh), m_arm)
+    ));
+    m_driverController.start().whileTrue(new RunCommand(() -> m_elevator.ManualDown(), m_elevator));
+    m_driverController.start().onFalse(new SequentialCommandGroup(
+      new InstantCommand(() -> m_elevator.ResetElevatorZero(), m_elevator), 
+      new InstantCommand(() -> m_elevator.StopElevator(), m_elevator)
+    ));
 
-//need to add driver controller buttons for mid level scoring
-//something to add something to reset elevator zero position if it gets out of sync with the actual elevator position will need a method in the elevator class to reset the encoder position to zero
-
-    //m_driverController.a().onFalse(new InstantCommand(() -> m_elevator.SetSpeed(0)));
-    //m_driverController.y().onFalse(new InstantCommand(() -> m_elevator.SetSpeed(0)));
-    //m_driverController.b().onTrue(new InstantCommand(() -> m_arm.changeSetpoint(0.01)));
-    //m_driverController.x().onTrue(new InstantCommand(() -> m_arm.changeSetpoint(.11)));
     m_drive.setDefaultCommand(
         new ArcadeDrive(m_drive,() -> -m_driverController.getLeftY(),() -> -m_driverController.getRightX())); //using arcade drive command. telling which controller buttons are inputs
-      }
+  }
   
 
   //making a command to call autonomous in Robot.java nothing else needs to be done here if we are just using pathplanner
