@@ -27,7 +27,10 @@ public class ArcadeDrive extends Command{
       double x = MathUtil.applyDeadband(m_xSupplier.getAsDouble(), OperatorConstants.kDeadband);
       double z = MathUtil.applyDeadband(m_zSupplier.getAsDouble(), OperatorConstants.kDeadband);
 
-      var speeds = DifferentialDrive.arcadeDriveIK(x, z, true);
+      z = Math.copySign(Math.pow(z, 2), z) * DriveConstants.kMaxRotation; //squared inputs for more control at low speeds
+      x = Math.copySign(Math.pow(x, 2), x); //squared inputs for more control at low speeds
+
+      var speeds = DifferentialDrive.arcadeDriveIK(x, z, false);
       
       m_drive.runOpenLoop(speeds.left * DriveConstants.kMaxSpeedMetersPerSec * DriveConstants.kVoltPerSpeed, speeds.right * DriveConstants.kMaxSpeedMetersPerSec * DriveConstants.kVoltPerSpeed);
     }

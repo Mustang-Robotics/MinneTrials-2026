@@ -93,7 +93,7 @@ public final class Configs {
                 .closedLoop
                 .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
                 .p(.02)
-                .outputRange(-.3, .3)
+                .outputRange(-1, 1)
                 .feedForward
                 .kV(.002)
                 .kS(.1835)
@@ -104,7 +104,7 @@ public final class Configs {
                 .maxMotion
                 .allowedProfileError(1)
                 .cruiseVelocity(5600)
-                .maxAcceleration(5000);
+                .maxAcceleration(10000);
                 
         }
     }

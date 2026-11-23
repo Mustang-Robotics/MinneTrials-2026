@@ -29,6 +29,21 @@ import edu.wpi.first.math.util.Units;
 
 public final class Constants {
 
+  public static final class Setpoints {
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Changable values for tuning the robot. These are the only values that should be changed in the Setpoints class.
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    public static final double kElevatorLow = 1.0; //low setpoint for elevator
+    public static final double kElevatorMid = 14.0; //mid setpoint for elevator
+    public static final double kElevatorHigh = 21.9; //high setpoint for elevator
+    public static final double kArmLow = 0.01; //low setpoint for arm
+    public static final double kArmHigh = 0.11; //high setpoint for arm
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+  }
+
   //constants related to the driver(s) and controllers
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0; //USB port of controller. Used in RobotContainer
@@ -37,6 +52,15 @@ public final class Constants {
 
   //constants related to the drivesystem
   public static final class DriveConstants {
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Changable values for tuning the robot. These are the only values that should be changed in the DriveConstants class.
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    public static final double kMaxRotation = 0.8; //limiting the max rotation of the robot, this value is specific to MinneTrials
+    public static final double kMaxSpeedMetersPerSec = 3.2; //limiting the max speed of the robot, this value is specific to MinneTrials
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public static final int kLeftLeader = 9; //CAN ID of LeftLeader Motor. Used in DriveSubsystem
     //public static final int kLeftFollower = 34; //CAN ID of LeftFollower Motor. Used in DriveSubsystem
@@ -56,14 +80,21 @@ public final class Constants {
     public static final double kDrivingMotorReduction = 8.46; //Gear Ratio of gear box
     public static final double kDriveWheelFreeSpeed = 
       (kDrivingMotorFreeSpeedRps * kWheelCircumferenceMeters) / kDrivingMotorReduction; //calculates max speed of the wheel
-    public static final double kMaxSpeedMetersPerSec = 3.2; //limiting the max speed of the robot, this value is specific to MinneTrials
     public static final double kVoltPerSpeed = kDrivingMotorReduction * 60 / (kNeoKv * 2 * Math.PI * kWheelRadiusMeters); //calculates how many volts it takes to move a specific speed
-
     
   }
 
   //Constants related to pathplanner
   public static final class AutoConfig {
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Changable values for tuning the robot. These are the only values that should be changed in the pathplanner class.
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    
     public static final Vector<N3> qelems = VecBuilder.fill(0.0625, 0.0625, .0625); //these and the next ones are related to acceptable error in the path see the link below for more info
     public static final Vector<N2> relems = VecBuilder.fill(.5, 1); //more info here https://docs.wpilib.org/en/stable/docs/software/advanced-controls/state-space/state-space-intro.html#lqr-tuning
     //adds the robot settings from the pathplanner app
@@ -79,14 +110,24 @@ public final class Constants {
 
   //constants related to photonvision
   public static class Vision {
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Changable values for tuning the robot. These are the only values that should be changed in the Vision class.
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    //These two set how much we want to trust our vision measurements. Lower value = more trust
+    public static final Matrix<N3, N1> kSingleTagStdDevs = VecBuilder.fill(.25, .25, .25); //for when only one tag is seen
+    public static final Matrix<N3, N1> kMultiTagStdDevs = VecBuilder.fill(.125, .125, .125); //for when multiple tags are seen. We usually trust this more because it is giving more data
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    
     public static final String kTagCamera = "Main"; //name of camera that we are using. This is set here: http://photonvision.local:5800/#/dashboard
 
+//Need to get these positions updated by measuring on the robot. The values below are just placeholders for now. The rotation is in radians and the translation is in meters.
     public static final Transform3d kRobotToTagCam = //sets the location on the robot relative to the center x=forward/backward y=left/right z=up from floor 
             new Transform3d(new Translation3d(0.2286, 0.1746, 0.5429), new Rotation3d(0, 0, -0.5236)); //Looking at a picture of roll/pitch/yaw will be more helpful than a description
     
 
-    //These two set how much we want to trust our vision measurements. Lower value = more trust
-    public static final Matrix<N3, N1> kSingleTagStdDevs = VecBuilder.fill(.25, .25, .25); //for when only one tag is seen
-    public static final Matrix<N3, N1> kMultiTagStdDevs = VecBuilder.fill(.125, .125, .125); //for when multiple tags are seen. We usually trust this more because it is giving more data
+    
 }
 }
